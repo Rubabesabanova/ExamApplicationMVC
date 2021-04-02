@@ -1,0 +1,39 @@
+﻿@model ExamApplicationMVC.Models.HomeViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Exam</h1>
+    <p class="lead">It is a website for online exam.</p>
+    <p><a href="#startexam" class="btn btn-primary btn-lg">Start Online Exam</a></p>
+</div>
+
+<div class="row" id="startexam">
+    @foreach (var item in Model.Subjects)
+    {
+        <div class="col-md-4">
+            <h2>@item.Name</h2>
+            <p>
+                @item.Topics.Count topics
+            </p>
+        </div>
+    }
+</div>
+    <div class="jumbotron">
+        <h1>Subjects</h1>
+    </div>
+    @foreach (var item in Model.Subjects)
+    {
+        <div id="#@item.Name" class="col-md-12">
+            <h2>@item.Name</h2>
+            <p>
+                @foreach (var topic in item.Topics)
+                {
+                <p><a href="@Url.Action("Topic", "Home", new { id=topic.Id})" class="btn btn-primary btn-lg">@topic.Name</a></p>
+            }
+
+                </p>
+            </div>
+        }
+</div>

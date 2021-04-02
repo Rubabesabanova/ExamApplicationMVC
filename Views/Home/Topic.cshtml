@@ -1,0 +1,63 @@
+﻿@model ExamApplicationMVC.Models.TopicViewModel
+@{
+    ViewBag.Title = "Topic Page";
+}
+
+<div class="jumbotron">
+    <h1>@Model.Topic.Name</h1>
+    <p class="lead">It is a website for online exam.</p>
+    <p><a href="#startexam" class="btn btn-primary btn-lg">Start Online Exam</a></p>
+</div>
+
+<div class="row" id="startexam">
+    <form action="@Url.Action("Result", "Home")" class="p-4 text-white" method="post">
+        @Html.AntiForgeryToken()
+        @{int number = 1; }
+        @foreach (var item in Model.Topic.Questions)
+        {
+            <div class="col-md-12">
+                <h2>@number ) @item.Title (@item.Point Points)</h2>
+                    <input type="hidden" value="@number" name="Id @item.Id" id="@item.Id" />
+                <div class="form-check btn btn-default" style="display: block;text-align:left;">
+                    <input class="form-check-input" type="checkbox" value="A" id="A" name="A @item.Id">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        @item.A
+                    </label>
+                </div>
+                <div class="form-check btn btn-default" style="display: block;text-align:left;">
+                    <input class="form-check-input" type="checkbox" value="B" id="B" name="B @item.Id">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        @item.B
+                    </label>
+                </div>
+                <div class="form-check btn btn-default" style="display: block;text-align:left;">
+                    <input class="form-check-input" type="checkbox" value="C" id="C" name="C @item.Id">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        @item.C
+                    </label>
+                </div>
+                <div class="form-check btn btn-default" style="display: block;text-align:left;">
+                    <input class="form-check-input" type="checkbox" value="D" id="D" name="D @item.Id">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        @item.D
+                    </label>
+                </div>
+                <div class="form-check btn btn-default" style="display: block;text-align:left;">
+                    <input class="form-check-input" type="checkbox" value="E" id="E" name="E item.Id">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        @item.E
+                    </label>
+                </div>
+            </div>
+            <div style="display:none;">@(number += 1)</div>
+        }
+        <!-- Submit Button -->
+        <button type="submit" class="form-group col-lg-8 mx-auto mb-0 btn btn-primary btn-block py-2" style="margin-top:10px;">
+            <span class="font-weight-bold">Submit</span>
+        </button>
+    </form>
+</div>
+
+
+
+
